@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+<h1>タスクの削除</h1>
+<form action="" method="POST">{% csrf_token %}
+    <p>{{task}}</p>
+    <input type="submit" value="delete">
+</form>
