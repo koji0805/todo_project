@@ -38,10 +38,8 @@ class UserLogoutView(View):
         return redirect('accounts:user_login')
 
 
-# @method_decorator(login_required, name='dispatch')
 class UserView(LoginRequiredMixin, TemplateView):
     template_name = 'user.html'
 
-    # @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
