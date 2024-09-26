@@ -1,6 +1,6 @@
 <h1>Todo List</h1>
 
-<p><a href="{% url 'create' %}">新規作成</a></p>
+<p><a href="{% url 'accounts:create' %}">新規作成</a></p>
 
 <table>
     <thead>
@@ -14,9 +14,9 @@
     <tr>
         <td>{{ task.title }}</td>
         <td>{{ task.deadline }}</td>
-        <td><a href="{% url 'detail' task.pk %}">詳細</a></td>
-        <td><a href="{% url 'update' task.pk %}">編集</a></td>
-        <td><a href="{% url 'delete' task.pk %}">削除</a></td>
+        <td><a href="{% url 'accounts:detail' task.pk %}">詳細</a></td>
+        <td><a href="{% url 'accounts:update' task.pk %}">編集</a></td>
+        <td><a href="{% url 'accounts:delete' task.pk %}">削除</a></td>
     </tr>
     {% endfor %}
     </tbody>

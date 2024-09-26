@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'todo.apps.TodoConfig',
 ]
 
 AUTH_USER_MODEL = 'accounts.Users'
@@ -125,4 +124,3 @@ STATIC_URL = '/static/'
 
 
 LOGIN_URL = '/accounts/user_login'
-LOGIN_REDIRECT_URL = '/todo/todo_list'

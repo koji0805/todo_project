@@ -7,7 +7,38 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView,  DeleteView
+from django.urls import reverse_lazy
+from .models import Todo
 
+
+class TodoList(ListView):
+    template_name = 'todo_list.html'
+    model = Todo
+    context_object_name = "tasks"
+
+class TodoDetail(DetailView):
+    template_name = 'todo_detail.html'
+    model = Todo
+    context_object_name = "task"
+
+class TodoCreate(CreateView):
+    template_name = 'todo_form.html'
+    model = Todo
+    fields = "__all__"
+    success_url = reverse_lazy("accounts:list")
+
+class TodoUpdate(UpdateView):
+    template_name = 'todo_form.html'
+    model = Todo
+    fields = "__all__"
+    success_url = reverse_lazy("accounts:list")
+
+class TodoDelete(DeleteView):
+    template_name = 'todo_confirm_delete.html'
+    model = Todo
+    context_object_name = "task"
+    success_url = reverse_lazy("accounts:list")
 
 class HomeView(TemplateView):
     template_name = 'home.html'
