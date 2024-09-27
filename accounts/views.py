@@ -10,12 +10,17 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView,  DeleteView
 from django.urls import reverse_lazy
 from .models import Todo
+from django.utils import timezone
 
 
 class TodoList(ListView):
     template_name = 'todo_list.html'
     model = Todo
     context_object_name = "tasks"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_time'] = timezone.now()
+        return context
 
 class TodoDetail(DetailView):
     template_name = 'todo_detail.html'
