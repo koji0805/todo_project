@@ -1,6 +1,14 @@
-<form action="" method="POST">{% csrf_token %}
+<form action="{% url 'accounts:create' %}" method="POST">{% csrf_token %}
     <table>
         {{ form.as_table }}
     </table>
+    <button type="button" onclick="history.back()">前画面に戻る</button>
     <input type="submit" value="送信">
 </form>
+
+<style>
+    .error-message {
+        color: red;
+        font-weight: bold;
+    }
+</style>

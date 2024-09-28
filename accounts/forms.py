@@ -1,6 +1,15 @@
 from django import forms
 from .models import Users
 from django.contrib.auth.password_validation import validate_password
+from .models import Todo  # Taskモデルを使用する場合
+
+class TodoForm(forms.ModelForm):
+    class Meta:
+        model = Todo
+        fields = ['title', 'description', 'deadline', 'urgency', 'importance']
+        widgets = {
+            'deadline': forms.DateInput(attrs={'type': 'date'}),  # カレンダー形式の入力
+        }
 
 
 class RegistForm(forms.ModelForm):

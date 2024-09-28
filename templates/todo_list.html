@@ -1,6 +1,7 @@
 <h1>タスク一覧</h1>
-
+<p>ログイン中のユーザー: {{ request.user.username }}</p>
 <p><a href="{% url 'accounts:create' %}">新規作成</a></p>
+<button type="button" onclick="history.back()">前画面に戻る</button>
 
 <table>
     <thead>
@@ -23,9 +24,9 @@
         <td><a href="{% url 'accounts:delete' task.pk %}">削除</a></td>
         <td>
             {% if task.is_past_due %}
-                <span style="color: red;">期限が過ぎています！</span>
+                <span style="color: orange;">期限が過ぎています！</span>
             {% elif task.is_approaching_deadline %}
-                <span style="color: orange;">締め切りまで3日以内です！</span>
+                <span style="color: red;">締め切りまで3日以内です！</span>
             {% endif %}
         </td>
     </tr>

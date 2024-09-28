@@ -11,6 +11,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView,  
 from django.urls import reverse_lazy
 from .models import Todo
 from django.utils import timezone
+from .forms import TodoForm
 
 
 class TodoList(ListView):
@@ -30,8 +31,12 @@ class TodoDetail(DetailView):
 class TodoCreate(CreateView):
     template_name = 'todo_form.html'
     model = Todo
-    fields = "__all__"
+    form_class = TodoForm
     success_url = reverse_lazy("accounts:list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user  
+        return super().form_valid(form)
 
 class TodoUpdate(UpdateView):
     template_name = 'todo_form.html'
@@ -72,7 +77,6 @@ class UserLogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect('accounts:user_login')
-
 
 class UserView(LoginRequiredMixin, TemplateView):
     template_name = 'user.html'
