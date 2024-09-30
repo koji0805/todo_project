@@ -22,6 +22,28 @@ class TodoList(ListView):
         context = super().get_context_data(**kwargs)
         context['current_time'] = timezone.now()
         return context
+    def get_queryset(self):
+        queryset = Todo.objects.all()
+
+        sort = self.request.GET.get('sort', None)
+        if sort == 'urgency':
+            queryset = queryset.order_by('-urgency')  
+        elif sort == 'importance':
+            queryset = queryset.order_by('-importance')  
+
+        urgency_filter = self.request.GET.get('urgency', None)
+        if urgency_filter:
+            queryset = queryset.filter(urgency=urgency_filter)  
+
+        importance_filter = self.request.GET.get('importance', None)
+        if importance_filter:
+            queryset = queryset.filter(importance=importance_filter)  
+
+        title_filter = self.request.GET.get('title', None)
+        if title_filter:
+            queryset = queryset.filter(title__icontains=title_filter)
+
+        return queryset
 
 class TodoDetail(DetailView):
     template_name = 'todo_detail.html'
