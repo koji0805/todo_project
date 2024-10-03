@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>タスク新規作成</title>
+    <title>タスク編集</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -14,7 +14,7 @@
 
         .container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: 50px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
@@ -24,7 +24,7 @@
         h1 {
             text-align: center;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         form {
@@ -36,11 +36,6 @@
             border-collapse: collapse;
         }
 
-        form table td {
-            padding: 10px;
-            vertical-align: top;
-        }
-
         input[type="text"], input[type="date"], select, textarea {
             width: 100%;
             padding: 10px;
@@ -48,70 +43,53 @@
             border-radius: 4px;
             box-sizing: border-box;
             margin-bottom: 15px;
-        }
-
-        input[type="submit"], button {
-            padding: 10px 20px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
             font-size: 16px;
         }
 
-        input[type="submit"] {
+        button {
+            padding: 10px 20px;
             background-color: #28a745;
             color: #fff;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #218838;
-        }
-
-        button {
-            background-color: #007bff;
-            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
         }
 
         button:hover {
+            background-color: #218838;
+        }
+
+        .back-btn {
+            background-color: #007bff;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .back-btn:hover {
             background-color: #0056b3;
         }
-
-        .error-message {
-            color: red;
-            font-weight: bold;
-        }
-
-        .btn-group {
-            display: flex;
-            justify-content: space-between;
-        }
-
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>タスク新規作成</h1>
+        <h1>タスクを編集する</h1>
 
-        <form action="{% url 'accounts:create' %}" method="POST">
+        <form action="" method="POST">
             {% csrf_token %}
-            <table>
-                {{ form.as_table }}
-            </table>
+            {{ form.as_p }}
 
-            <div class="btn-group">
-                <button type="button" onclick="history.back()">前画面に戻る</button>
-                <input type="submit" value="送信">
-            </div>
+            <!-- 更新ボタン -->
+            <button type="submit">更新する</button>
         </form>
 
-        <style>
-            .error-message {
-                color: red;
-                font-weight: bold;
-            }
-        </style>
+        <!-- 戻るボタン -->
+        <button type="button" class="back-btn" onclick="history.back()">前画面に戻る</button>
     </div>
 
 </body>
 </html>
+
+

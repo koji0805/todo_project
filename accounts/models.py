@@ -37,8 +37,8 @@ class Todo(models.Model):
     title = models.CharField("タスク名", max_length=30)
     description = models.TextField("詳細", blank=True)
     deadline = models.DateTimeField("締切")
-    urgency = models.IntegerField(choices=[(i, i) for i in range(1, 6)], default=3)
-    importance = models.IntegerField(choices=[(i, i) for i in range(1, 6)], default=3)
+    urgency = models.IntegerField('緊急度',choices=[(i, i) for i in range(1, 6)], default=3)
+    importance = models.IntegerField('重要度',choices=[(i, i) for i in range(1, 6)], default=3)
     user = models.ForeignKey(
         'accounts.Users',on_delete=models.CASCADE
     )

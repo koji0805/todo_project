@@ -61,11 +61,11 @@ class TodoCreate(CreateView):
         return super().form_valid(form)
 
 class TodoUpdate(UpdateView):
-    template_name = 'todo_form.html'
+    template_name = 'todo_update.html'
     model = Todo
     fields = "__all__"
     success_url = reverse_lazy("accounts:list")
-
+    
 class TodoDelete(DeleteView):
     template_name = 'todo_confirm_delete.html'
     model = Todo
