@@ -86,6 +86,19 @@
             justify-content: space-between;
         }
 
+        .back-btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: #fff;
+                text-decoration: none;
+                font-size: 16px;  
+                border-radius: 4px;
+                text-align: center;
+                border: none;  
+                cursor: pointer; 
+            }
+
     </style>
 </head>
 <body>
@@ -100,7 +113,7 @@
             </table>
 
             <div class="btn-group">
-                <button type="button" onclick="history.back()">前画面に戻る</button>
+                <a href="{% url 'accounts:list' %}" class="back-btn">前のページに戻る</a>
                 <input type="submit" value="送信">
             </div>
         </form>

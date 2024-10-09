@@ -46,15 +46,18 @@
             margin: 5px 0;
         }
 
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+        .back-btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: #fff;
+                text-decoration: none;
+                font-size: 16px;  
+                border-radius: 4px;
+                text-align: center;
+                border: none;  
+                cursor: pointer; 
+            }
 
         button:hover {
             background-color: #0056b3;
@@ -73,7 +76,8 @@
             <p><strong>詳細:</strong> {{ task.description }}</p>
         </div>
 
-        <button type="button" onclick="history.back()">前画面に戻る</button>
+        <a href="{% url 'accounts:list' %}" class="back-btn">前のページに戻る</a>
+
     </div>
 
 </body>

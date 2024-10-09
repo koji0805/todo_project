@@ -12,12 +12,14 @@ from django.urls import reverse_lazy
 from .models import Todo
 from django.utils import timezone
 from .forms import TodoForm
+from django.contrib import messages
 
 
-class TodoList(ListView):
+class TodoList(LoginRequiredMixin, ListView):
     template_name = 'todo_list.html'
     model = Todo
     context_object_name = "tasks"
+    login_url = '/accounts/user_login/'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['current_time'] = timezone.now()
@@ -44,33 +46,57 @@ class TodoList(ListView):
             queryset = queryset.filter(title__icontains=title_filter)
 
         return queryset
+    
+    def handle_no_permission(self):
+        messages.warning(self.request, 'ログインしてください')
+        return redirect(self.get_login_url())
 
-class TodoDetail(DetailView):
+class TodoDetail(LoginRequiredMixin, DetailView):
     template_name = 'todo_detail.html'
     model = Todo
     context_object_name = "task"
+    login_url = '/accounts/user_login/'
 
-class TodoCreate(CreateView):
+    def handle_no_permission(self):
+        messages.warning(self.request, 'ログインしてください')
+        return redirect(self.get_login_url())
+
+class TodoCreate(LoginRequiredMixin, CreateView):
     template_name = 'todo_form.html'
     model = Todo
     form_class = TodoForm
     success_url = reverse_lazy("accounts:list")
+    login_url = '/accounts/user_login/'
+
+    def handle_no_permission(self):
+        messages.warning(self.request, 'ログインしてください')
+        return redirect(self.get_login_url())
 
     def form_valid(self, form):
         form.instance.user = self.request.user  
         return super().form_valid(form)
 
-class TodoUpdate(UpdateView):
+class TodoUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'todo_update.html'
     model = Todo
     fields = "__all__"
     success_url = reverse_lazy("accounts:list")
+    login_url = '/accounts/user_login/'
+
+    def handle_no_permission(self):
+        messages.warning(self.request, 'ログインしてください')
+        return redirect(self.get_login_url())
     
-class TodoDelete(DeleteView):
+class TodoDelete(LoginRequiredMixin, DeleteView):
     template_name = 'todo_confirm_delete.html'
     model = Todo
     context_object_name = "task"
     success_url = reverse_lazy("accounts:list")
+    login_url = '/accounts/user_login/'
+
+    def handle_no_permission(self):
+        messages.warning(self.request, 'ログインしてください')
+        return redirect(self.get_login_url())
 
 class HomeView(TemplateView):
     template_name = 'home.html'

@@ -91,7 +91,9 @@
             <input type="submit" value="削除">
         </form>
 
-        <button type="button" onclick="history.back()">前画面に戻る</button>
+        <form action="{% url 'accounts:list' %}" method="GET">
+            <button type="submit">前のページに戻る</button>
+        </form>
     </div>
 
 </body>
