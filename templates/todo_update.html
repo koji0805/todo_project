@@ -46,6 +46,11 @@
             font-size: 16px;
         }
 
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
         button {
             padding: 10px 20px;
             background-color: #28a745;
@@ -54,7 +59,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            width: 100%;
+            width: 48%;
         }
 
         button:hover {
@@ -63,8 +68,6 @@
 
         .back-btn {
             background-color: #007bff;
-            margin-top: 10px;
-            width: 100%;
         }
 
         .back-btn:hover {
@@ -81,13 +84,12 @@
             {% csrf_token %}
             {{ form.as_p }}
 
-            <button type="submit">更新する</button>
+            <div class="button-container">
+                <button type="button" class="back-btn" onclick="history.back()">前画面に戻る</button>
+                <button type="submit">編集する</button>
+            </div>
         </form>
-
-        <button type="button" class="back-btn" onclick="history.back()">前画面に戻る</button>
     </div>
 
 </body>
 </html>
-
-

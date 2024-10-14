@@ -224,16 +224,16 @@
         <a href="{% url 'accounts:create' %}" class="create-btn">新規作成</a>
 
         <div class="sort-buttons">
-            <a href="?sort=urgency">緊急度でソート</a>
-            <a href="?sort=importance">重要度でソート</a>
+            <a href="javascript:void(0);" onclick="sortTable('urgency')">緊急度でソート</a>
+            <a href="javascript:void(0);" onclick="sortTable('importance')">重要度でソート</a>
         </div>
 
         <div class="filter-section">
             <h3>絞り込み</h3>
-            <form method="GET">
+            <form id="filter-form">
                 <div>
                     <label for="title">タイトル</label>
-                    <input type="text" name="title" id="title" value="{{ request.GET.title }}">
+                    <input type="text" name="title" id="title">
                 </div>
 
                 <div>
@@ -265,11 +265,11 @@
                     <input type="date" id="deadline" name="deadline">
                 </div>
 
-                <button type="submit">絞り込み</button>
+                <button type="button" onclick="filterTasks()">絞り込み</button>
             </form>
         </div>
 
-        <table class="task-table">
+        <table class="task-table" id="task-table">
             <thead>
                 <tr>
                     <th>タスク名</th>
@@ -315,6 +315,56 @@
 
     </div>
 
+    <script>
+        // タスクの絞り込み
+        function filterTasks() {
+            const title = document.getElementById("title").value.toLowerCase();
+            const urgency = document.getElementById("urgency").value;
+            const importance = document.getElementById("importance").value;
+            const deadline = document.getElementById("deadline").value;
+            const rows = document.querySelectorAll("#task-table tbody tr");
+
+            rows.forEach(row => {
+                const taskTitle = row.cells[0].innerText.toLowerCase();
+                const taskUrgency = row.cells[1].innerText;
+                const taskImportance = row.cells[2].innerText;
+                const taskDeadline = row.cells[3].innerText;
+
+                let isMatch = true;
+
+                if (title && !taskTitle.includes(title)) {
+                    isMatch = false;
+                }
+                if (urgency && taskUrgency !== urgency) {
+                    isMatch = false;
+                }
+                if (importance && taskImportance !== importance) {
+                    isMatch = false;
+                }
+                if (deadline && taskDeadline !== deadline) {
+                    isMatch = false;
+                }
+
+                row.style.display = isMatch ? "" : "none";
+            });
+        }
+
+        // タスクのソート
+        function sortTable(type) {
+            const rows = Array.from(document.querySelectorAll("#task-table tbody tr"));
+            const columnIndex = type === 'urgency' ? 1 : 2;
+
+            rows.sort((a, b) => {
+                const aValue = parseInt(a.cells[columnIndex].innerText);
+                const bValue = parseInt(b.cells[columnIndex].innerText);
+                return aValue - bValue;
+            });
+
+            const tbody = document.querySelector("#task-table tbody");
+            tbody.innerHTML = "";
+            rows.forEach(row => tbody.appendChild(row));
+        }
+    </script>
+
 </body>
 </html>
-

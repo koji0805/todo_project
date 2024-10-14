@@ -40,9 +40,9 @@
             color: #555;
         }
 
-        form {
-            text-align: center;
-            margin-bottom: 20px;
+        .button-container {
+            display: flex;
+            justify-content: space-between;
         }
 
         input[type="submit"] {
@@ -86,14 +86,16 @@
             <p><strong>{{ task }}</strong></p>
         </div>
 
-        <form action="" method="POST">
-            {% csrf_token %}
-            <input type="submit" value="削除">
-        </form>
+        <div class="button-container">
+            <form action="{% url 'accounts:list' %}" method="GET">
+                <button type="submit">前のページに戻る</button>
+            </form>
 
-        <form action="{% url 'accounts:list' %}" method="GET">
-            <button type="submit">前のページに戻る</button>
-        </form>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="削除する">
+            </form>
+        </div>
     </div>
 
 </body>
