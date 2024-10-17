@@ -6,11 +6,10 @@ from .models import Todo
 class TodoForm(forms.ModelForm):
     class Meta:
         model = Todo
-        fields = ['title', 'description', 'deadline', 'urgency', 'importance']
+        fields = ['title', 'description', 'deadline', 'urgency', 'importance',]
         widgets = {
             'deadline': forms.DateInput(attrs={'type': 'date'}),  
         }
-
 
 class RegistForm(forms.ModelForm):
     username = forms.CharField(label='名前')

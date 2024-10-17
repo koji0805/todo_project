@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="POST">
-   {% csrf_token %}
-   {{ form.as_p }}
-   <input type="submit" value="ユーザ登録">
-</form>
+<div class="container" style="max-width: 600px; margin-top: 50px;">
+    <h1 class="text-center mb-4">ユーザー登録</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-success btn-block">ユーザ登録</button>
+    </form>
+</div>
 {% endblock %}

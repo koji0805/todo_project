@@ -48,7 +48,8 @@
 
         .button-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 20px;
         }
 
         button {
@@ -59,7 +60,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            width: 48%;
+            width: 150px;  /* 統一されたサイズ */
         }
 
         button:hover {
@@ -73,6 +74,7 @@
         .back-btn:hover {
             background-color: #0056b3;
         }
+
     </style>
 </head>
 <body>
@@ -82,11 +84,10 @@
 
         <form action="" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
-
+            {{ form.as_p }} 
             <div class="button-container">
                 <button type="button" class="back-btn" onclick="history.back()">前画面に戻る</button>
-                <button type="submit">編集する</button>
+                <button type="submit">更新する</button>
             </div>
         </form>
     </div>

@@ -1,4 +1,19 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<center><h1>やることリスト</h1></center>
+<div class="container text-center" style="max-width: 600px; margin-top: 50px;">
+    <h1 class="mb-4">やることリスト ホーム</h1>
+    
+    <div class="btn-container">
+        {% if user.is_authenticated %}
+            <!-- ログインしている場合はログアウトボタンとタスク一覧ボタンを表示 -->
+            <a href="{% url 'accounts:user_logout' %}" class="btn btn-danger btn-lg mb-2">ログアウト</a>
+            <a href="{% url 'accounts:list' %}" class="btn btn-success btn-lg mb-2">タスク一覧</a>
+        {% else %}
+            <!-- ログインしていない場合はログインとユーザー登録ボタンを表示 -->
+            <a href="{% url 'accounts:user_login' %}" class="btn btn-primary btn-lg mb-2">ログイン</a>
+            <a href="{% url 'accounts:regist' %}" class="btn btn-info btn-lg mb-2">ユーザー登録</a>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

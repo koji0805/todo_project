@@ -20,13 +20,15 @@ class TodoList(LoginRequiredMixin, ListView):
     model = Todo
     context_object_name = "tasks"
     login_url = '/accounts/user_login/'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['current_time'] = timezone.now()
         return context
+    
     def get_queryset(self):
         queryset = Todo.objects.all()
-
+        print(queryset)
         sort = self.request.GET.get('sort', None)
         if sort == 'urgency':
             queryset = queryset.order_by('-urgency')  
@@ -79,13 +81,17 @@ class TodoCreate(LoginRequiredMixin, CreateView):
 class TodoUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'todo_update.html'
     model = Todo
-    fields = "__all__"
+    fields = ['title', 'description', 'deadline', 'urgency', 'importance']
     success_url = reverse_lazy("accounts:list")
     login_url = '/accounts/user_login/'
 
     def handle_no_permission(self):
         messages.warning(self.request, 'ログインしてください')
         return redirect(self.get_login_url())
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user  
+        return super().form_valid(form)
     
 class TodoDelete(LoginRequiredMixin, DeleteView):
     template_name = 'todo_confirm_delete.html'
@@ -124,7 +130,7 @@ class UserLogoutView(View):
     
     def get(self, request, *args, **kwargs):
         logout(request)
-        return redirect('accounts:user_login')
+        return redirect('accounts:home')
 
 class UserView(LoginRequiredMixin, TemplateView):
     template_name = 'user.html'
