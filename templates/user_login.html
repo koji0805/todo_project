@@ -1,25 +1,125 @@
-{% extends 'base.html' %}
-{% block content %}
-<div class="container" style="max-width: 600px; margin-top: 50px;">
-    <h1 class="text-center mb-4">ログイン</h1>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    {% if messages %}
-    <div class="alert alert-danger" role="alert">
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
+        *:focus {
+            outline: none;
+        }
 
-    <form method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.as_p }}
+        body {
+            font-family: Arial;
+            background-color: #3498DB;
+            padding: 50px;
+        }
+
+        .login {
+            margin: 20px auto;
+            width: 300px;
+        }
+
+        .login-screen {
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .app-title {
+            text-align: center;
+            color: #777;
+        }
+
+        .login-form {
+            text-align: center;
+        }
+
+        .control-group {
+            margin-bottom: 10px;
+        }
+
+        input {
+            text-align: center;
+            background-color: #ECF0F1;
+            border: 2px solid transparent;
+            border-radius: 3px;
+            font-size: 16px;
+            font-weight: 200;
+            padding: 10px 0;
+            width: 250px;
+            transition: border .5s;
+        }
+
+        input:focus {
+            border: 2px solid #3498DB;
+            box-shadow: none;
+        }
+
+        .btn {
+            border: 2px solid transparent;
+            background: #3498DB;
+            color: #ffffff;
+            font-size: 16px;
+            line-height: 25px;
+            padding: 10px 0;
+            text-decoration: none;
+            text-shadow: none;
+            border-radius: 3px;
+            box-shadow: none;
+            transition: 0.25s;
+            display: block;
+            width: 250px;
+            margin: 10px auto;
+        }
+
+        .btn:hover {
+            background-color: #2980B9;
+        }
+
+        .alert {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 3px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <div class="login-screen">
+            <div class="app-title">
+                <h1>ログイン</h1>
+            </div>
+
+            <!-- エラーメッセージを表示 -->
+            {% if messages %}
+            <div class="alert">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="login-form">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="control-group">
+                        {{ form.as_p }} <!-- Djangoフォーム -->
+                    </div>
+                    <input type="hidden" name="next" value="{{ request.GET.next }}"> <!-- nextパラメータ -->
+                    <button type="submit" class="btn">ログイン</button>
+                </form>
+            </div>
         </div>
-        <input type="hidden" name="next" value="{{ request.GET.next }}">
-        <button type="submit" class="btn btn-success btn-block">ログイン</button>
-    </form>
-</div>
-{% endblock %}
+    </div>
+</body>
+</html>
