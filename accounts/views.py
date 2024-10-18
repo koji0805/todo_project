@@ -13,7 +13,7 @@ from .models import Todo
 from django.utils import timezone
 from .forms import TodoForm
 from django.contrib import messages
-
+from django.urls import reverse
 
 class TodoList(LoginRequiredMixin, ListView):
     template_name = 'todo_list.html'
@@ -84,7 +84,7 @@ class TodoCreate(LoginRequiredMixin, CreateView):
 class TodoUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'todo_update.html'
     model = Todo
-    fields = ['title', 'description', 'deadline', 'urgency', 'importance']
+    form_class = TodoForm
     success_url = reverse_lazy("accounts:list")
     login_url = '/accounts/user_login/'
 
@@ -127,7 +127,7 @@ class UserLoginView(FormView):
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(email=email, password=password)
-        next_url = request.POST.get('next', 'accounts:home') 
+        next_url = request.POST.get('next') or reverse('accounts:home')
 
         if user is not None and user.is_active:
             login(request, user)

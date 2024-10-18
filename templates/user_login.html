@@ -113,9 +113,9 @@
                 <form method="POST">
                     {% csrf_token %}
                     <div class="control-group">
-                        {{ form.as_p }} <!-- Djangoフォーム -->
+                        {{ form.as_p }} 
                     </div>
-                    <input type="hidden" name="next" value="{{ request.GET.next }}"> <!-- nextパラメータ -->
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
                     <button type="submit" class="btn">ログイン</button>
                 </form>
             </div>
