@@ -81,7 +81,6 @@
             background-color: #218838;
         }
 
-        /* テーブル全体のスタイル */
         .task-table {
             width: 100%;
             border-collapse: collapse;
@@ -92,9 +91,8 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* テーブルヘッダー全体を緑で埋める */
         .task-table thead {
-            background-color: #28a745; /* 緑色 */
+            background-color: #28a745;
             color: #fff;
         }
 
@@ -110,10 +108,6 @@
 
         .task-table tr:nth-child(even) {
             background-color: #f2f2f2;
-        }
-
-        .task-table tr:hover {
-            background-color: transparent;
         }
 
         .no-tasks {
@@ -136,7 +130,7 @@
         .back-btn {
             background-color: #007bff;
             color: #fff;
-            border: none; /* 黒縁（ボーダー）を取り除く */
+            border: none; 
         }
 
         .create-btn {
@@ -147,8 +141,9 @@
         }
 
         .update-btn {
-            background-color: #218838;
+            background-color: #28a745;
             color: #fff;
+            transition: background-color 0.3s; 
         }
 
         .delete-btn {
@@ -170,7 +165,7 @@
         }
 
         .update-btn:hover {
-            background-color: #218838;
+            background-color: #218838 !important; 
         }
 
         .delete-btn:hover {
@@ -213,12 +208,12 @@
         }
 
         .approaching-deadline {
-            color: #ffffff !important; 
+            color: rgb(255, 255, 0) !important; 
         }
     </style>
 </head>
 <body>
-
+   
     <div class="container">
 
         <div class="user-info">
@@ -287,6 +282,7 @@
                     <th>重要度</th>
                     <th>締め切り日</th>
                     <th class="actions">操作</th>
+                    <th>警告</th>
                 </tr>
             </thead>
             <tbody>
@@ -346,7 +342,34 @@
             tbody.innerHTML = ""; 
             rows.forEach(row => tbody.appendChild(row)); 
         }
+        function filterTasks() {
+            const titleFilter = document.querySelector("#title").value.toLowerCase();
+            const urgencyFilter = document.querySelector("#urgency").value;
+            const importanceFilter = document.querySelector("#importance").value;
+            const deadlineFilter = document.querySelector("#deadline").value;
+
+            const rows = document.querySelectorAll("#task-table tbody tr");
+
+            rows.forEach(row => {
+                const title = row.cells[0].innerText.toLowerCase(); 
+                const urgency = row.cells[1].innerText; 
+                const importance = row.cells[2].innerText; 
+                const deadline = row.cells[3].innerText; 
+
+                const matchTitle = !titleFilter || title.includes(titleFilter);
+                const matchUrgency = !urgencyFilter || urgency === urgencyFilter;
+                const matchImportance = !importanceFilter || importance === importanceFilter;
+                const matchDeadline = !deadlineFilter || deadline === deadlineFilter;
+
+                if (matchTitle && matchUrgency && matchImportance && matchDeadline) {
+                    row.style.display = ""; 
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
     </script>
+    
 
 </body>
 </html>

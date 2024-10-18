@@ -31,16 +31,6 @@
             margin-bottom: 20px;
         }
 
-        form table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        form table td {
-            padding: 10px;
-            vertical-align: top;
-        }
-
         input[type="text"], input[type="date"], select, textarea {
             width: 100%;
             padding: 10px;
@@ -50,54 +40,44 @@
             margin-bottom: 15px;
         }
 
-        input[type="submit"], button {
-            padding: 10px 20px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
-        input[type="submit"] {
+        button, input[type="submit"] {
+            padding: 10px 20px;
             background-color: #28a745;
             color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 150px;
         }
 
-        input[type="submit"]:hover {
+        button:hover, input[type="submit"]:hover {
             background-color: #218838;
         }
 
-        button {
+        /* 追加のスタイル：<a>タグにボタンのスタイルを適用 */
+        a.back-btn {
+            display: inline-block;
+            padding: 10px 20px;
             background-color: #007bff;
             color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
         }
 
-        button:hover {
+        a.back-btn:hover {
             background-color: #0056b3;
         }
-
-        .error-message {
-            color: red;
-            font-weight: bold;
-        }
-
-        .btn-group {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .back-btn {
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: #007bff;
-                color: #fff;
-                text-decoration: none;
-                font-size: 16px;  
-                border-radius: 4px;
-                text-align: center;
-                border: none;  
-                cursor: pointer; 
-            }
 
     </style>
 </head>
@@ -108,22 +88,13 @@
 
         <form action="{% url 'accounts:create' %}" method="POST">
             {% csrf_token %}
-            <table>
-                {{ form.as_table }}
-            </table>
+            {{ form.as_p }} 
 
-            <div class="btn-group">
+            <div class="button-container">
                 <a href="{% url 'accounts:list' %}" class="back-btn">前のページに戻る</a>
                 <input type="submit" value="追加する">
             </div>
         </form>
-
-        <style>
-            .error-message {
-                color: red;
-                font-weight: bold;
-            }
-        </style>
     </div>
 
 </body>

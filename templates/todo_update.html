@@ -14,7 +14,7 @@
 
         .container {
             max-width: 600px;
-            margin: 50px auto;
+            margin: 0 auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
@@ -24,16 +24,11 @@
         h1 {
             text-align: center;
             color: #333;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         form {
             margin-bottom: 20px;
-        }
-
-        form table {
-            width: 100%;
-            border-collapse: collapse;
         }
 
         input[type="text"], input[type="date"], select, textarea {
@@ -43,7 +38,6 @@
             border-radius: 4px;
             box-sizing: border-box;
             margin-bottom: 15px;
-            font-size: 16px;
         }
 
         .button-container {
@@ -52,7 +46,7 @@
             gap: 20px;
         }
 
-        button {
+        button, input[type="submit"] {
             padding: 10px 20px;
             background-color: #28a745;
             color: #fff;
@@ -60,15 +54,16 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            width: 150px;  /* 統一されたサイズ */
+            width: 150px;
         }
 
-        button:hover {
+        button:hover, input[type="submit"]:hover {
             background-color: #218838;
         }
 
         .back-btn {
             background-color: #007bff;
+            color: #fff;
         }
 
         .back-btn:hover {
@@ -85,6 +80,7 @@
         <form action="" method="POST">
             {% csrf_token %}
             {{ form.as_p }} 
+
             <div class="button-container">
                 <button type="button" class="back-btn" onclick="history.back()">前画面に戻る</button>
                 <button type="submit">更新する</button>
