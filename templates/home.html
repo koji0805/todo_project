@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container text-center" style="max-width: 600px; margin-top: 50px;">
-    <h1 class="mb-4">やることリスト ホーム</h1>
+<div class="container" style="max-width: 600px; margin: 50px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+    <h1 class="text-center mb-4" style="color: #333;">やることリスト ホーム</h1>
     
-    <div class="btn-container">
+    <div class="btn-container text-center">
         {% if user.is_authenticated %}
             <!-- ログインしている場合はログアウトボタンとタスク一覧ボタンを表示 -->
-            <a href="{% url 'accounts:user_logout' %}" class="btn btn-danger btn-lg mb-2">ログアウト</a>
-            <a href="{% url 'accounts:list' %}" class="btn btn-success btn-lg mb-2">タスク一覧</a>
+            <a href="{% url 'accounts:user_logout' %}" class="btn btn-danger btn-lg mb-3" style="width: 100%; max-width: 300px;">ログアウト</a>
+            <a href="{% url 'accounts:list' %}" class="btn btn-success btn-lg mb-3" style="width: 100%; max-width: 300px;">タスク一覧</a>
         {% else %}
             <!-- ログインしていない場合はログインとユーザー登録ボタンを表示 -->
-            <a href="{% url 'accounts:user_login' %}" class="btn btn-primary btn-lg mb-2">ログイン</a>
-            <a href="{% url 'accounts:regist' %}" class="btn btn-info btn-lg mb-2">ユーザー登録</a>
+            <a href="{% url 'accounts:user_login' %}" class="btn btn-primary btn-lg mb-3" style="width: 100%; max-width: 300px;">ログイン</a>
+            <a href="{% url 'accounts:regist' %}" class="btn btn-info btn-lg mb-3" style="width: 100%; max-width: 300px;">ユーザー登録</a>
         {% endif %}
     </div>
 </div>
