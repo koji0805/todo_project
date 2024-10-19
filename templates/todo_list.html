@@ -210,6 +210,9 @@
         .approaching-deadline {
             color: rgb(255, 255, 0) !important; 
         }
+        th {
+            text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -282,7 +285,7 @@
                     <th>重要度</th>
                     <th>締め切り日</th>
                     <th class="actions">操作</th>
-                    <th>警告</th>
+                    <th>注意事項</th>
                 </tr>
             </thead>
             <tbody>
@@ -301,9 +304,9 @@
                     </td>
                     <td>
                         {% if task.is_past_due %}
-                            <span style="color: orange;">期限が過ぎています！</span>
+                            <span style="color: #e74c3c ;text-shadow: 0.2px 0.2px 0.5px black;">期限が過ぎています！</span>
                         {% elif task.is_approaching_deadline %}
-                            <span class="approaching-deadline" style="color: yellow;">締め切りまで3日以内です！</span>
+                            <span class="approaching-deadline" style="color: #ffd700; text-shadow: 0.5px 0.5px 1px black;">締め切りまで3日以内です！</span>
                         {% endif %}
                     </td>
                 </tr>

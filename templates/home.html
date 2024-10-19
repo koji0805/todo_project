@@ -7,8 +7,8 @@
     <div class="btn-container text-center">
         {% if user.is_authenticated %}
             <!-- ログインしている場合はログアウトボタンとタスク一覧ボタンを表示 -->
-            <a href="{% url 'accounts:user_logout' %}" class="btn btn-danger btn-lg mb-3" style="width: 100%; max-width: 300px;">ログアウト</a>
             <a href="{% url 'accounts:list' %}" class="btn btn-success btn-lg mb-3" style="width: 100%; max-width: 300px;">タスク一覧</a>
+            <a href="{% url 'accounts:user_logout' %}" class="btn btn-danger btn-lg mb-3" style="width: 100%; max-width: 300px;">ログアウト</a>
         {% else %}
             <!-- ログインしていない場合はログインとユーザー登録ボタンを表示 -->
             <a href="{% url 'accounts:user_login' %}" class="btn btn-primary btn-lg mb-3" style="width: 100%; max-width: 300px;">ログイン</a>

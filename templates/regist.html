@@ -15,7 +15,7 @@
 
         body {
             font-family: Arial;
-            background-color: #3498DB;
+            background-color: #f9f9f9;
             padding: 50px;
         }
 
@@ -28,6 +28,7 @@
             background-color: #FFF;
             padding: 20px;
             border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  
         }
 
         .app-title {
@@ -36,11 +37,18 @@
         }
 
         .register-form {
-            text-align: center;
+            text-align: left; 
         }
 
         .control-group {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-align: left; 
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
 
         input {
@@ -60,25 +68,33 @@
             box-shadow: none;
         }
 
-        .btn {
-            border: 2px solid transparent;
-            background: #3498DB;
+        .btn, .back-btn {
+            border: none;
+            background: #3498DB;  
             color: #ffffff;
             font-size: 16px;
             line-height: 25px;
             padding: 10px 0;
             text-decoration: none;
-            text-shadow: none;
             border-radius: 3px;
-            box-shadow: none;
-            transition: 0.25s;
             display: block;
-            width: 250px;
-            margin: 10px auto;
+            width: 100%;  
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.25s;
         }
 
-        .btn:hover {
+        .btn:hover, .back-btn:hover {
             background-color: #2980B9;
+        }
+
+        .back-btn {
+            background-color: #007bff;
+            margin-top: 10px;  
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3;
         }
 
         .alert {
@@ -113,12 +129,10 @@
                 <h1>ユーザー登録</h1>
             </div>
 
-            <!-- エラーメッセージをフィールドごとに表示 -->
             <div class="register-form">
                 <form method="POST">
                     {% csrf_token %}
                     
-                    <!-- 名前フィールド -->
                     <div class="control-group">
                         {{ form.username.label_tag }} 
                         {{ form.username }}
@@ -131,7 +145,6 @@
                         {% endif %}
                     </div>
 
-                    <!-- 年齢フィールド -->
                     <div class="control-group">
                         {{ form.age.label_tag }} 
                         {{ form.age }}
@@ -144,7 +157,6 @@
                         {% endif %}
                     </div>
 
-                    <!-- メールアドレスフィールド -->
                     <div class="control-group">
                         {{ form.email.label_tag }} 
                         {{ form.email }}
@@ -157,7 +169,6 @@
                         {% endif %}
                     </div>
 
-                    <!-- パスワードフィールド -->
                     <div class="control-group">
                         {{ form.password.label_tag }} 
                         {{ form.password }}
@@ -172,6 +183,7 @@
 
                     <button type="submit" class="btn">ユーザー登録</button>
                 </form>
+                <button class="back-btn" onclick="history.back()">前の画面に戻る</button>
             </div>
         </div>
     </div>
