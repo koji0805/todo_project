@@ -33,7 +33,7 @@ class RegistForm(forms.ModelForm):
     def clean_password(self):
         password = self.cleaned_data.get('password')
         
-        if len(password) < 4:
+        if len(password) <= 4:
             raise forms.ValidationError("パスワードは4文字以上である必要があります。")
 
         try:
